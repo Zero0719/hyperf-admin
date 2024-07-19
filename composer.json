@@ -1,0 +1,25 @@
+{
+    "name": "zero0719/hyperf-admin",
+    "type": "library",
+    "license": "MIT",
+    "version": "0.0.1",
+    "autoload": {
+        "psr-4": {
+            "Zero0719\\HyperfAdmin\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "hejiayu",
+            "email": "724412707@qq.com"
+        }
+    ],
+    "require": {
+        "zero0719/hyperf-api": "*"
+    },
+    "extra": {
+        "hyperf": {
+            "config": "Zero0719\\HyperfAdmin\\ConfigProvider"
+        }
+    }
+}
