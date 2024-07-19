@@ -60,6 +60,19 @@ EOT;
 
     public function handle()
     {
+        $this->call('vendor:publish', [
+            'package' => 'phper666/jwt-auth'
+        ]);
+        
+        $this->call('vendor:publish', [
+            'package' => 'zero0719/hyperf-api'
+        ]);
+
+        $this->call('vendor:publish', [
+            'package' => 'zero0719/hyperf-admin'
+        ]);
+
+
         if (!Db::getSchemaBuilder()->hasTable('admin_users')) {
             $this->call('admin:migrate');
         };
