@@ -32,7 +32,7 @@ class UsersService extends BaseService
             throw new BusinessException('用户已存在');
         }
 
-        if (!AdminUsers::create($request->all())) {
+        if (!AdminUsers::create($this->request->all())) {
             throw new BusinessException('添加失败');
         }
     }
