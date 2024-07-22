@@ -10,22 +10,60 @@
 
 ## 安装&部署
 
-todo
-
-发布配置文件
-
 ```php
-php bin/hyperf.php vendor:publish zero0719/hyperf-admin
+composer require zero0719/hyperf-admin
 ```
 
 执行初始化命令
 ```php
-php bin/hyperf.php admin:init
+php bin/hyperf.php admin:install
 ```
 
-## 配置文件 admin.php
+配置 admin.php
 
-重点关注白名单用户ID和白名单角色标识即可
+配置 JWT
+
+```php
+'no_check_route' => [
+    ['post', '/sessions'],
+],
+```
+
+配置中间件
+```php
+return [
+    'http' => [
+        \Zero0719\HyperfApi\Middleware\CorsMiddleware::class,
+        \Zero0719\HyperfApi\Middleware\RequestLogMiddleware::class,
+        \Hyperf\Validation\Middleware\ValidationMiddleware::class
+    ],
+];
+```
+
+配置异常处理
+```php
+return [
+    'handler' => [
+        'http' => [
+            \Zero0719\HyperfApi\Exception\Handler\ValidationExceptionHandler::class,
+            \Zero0719\HyperfApi\Exception\Handler\JWTExceptionHandler::class,
+            \Zero0719\HyperfApi\Exception\Handler\ModelNotFoundExceptionHandler::class,
+            \Zero0719\HyperfApi\Exception\Handler\BusinessExceptionHandler::class,
+            \Zero0719\HyperfApi\Exception\Handler\AppExceptionHandler::class,
+            Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler::class,
+            App\Exception\Handler\AppExceptionHandler::class,
+        ],
+    ],
+];
+```
+
+## 其他
+
+后续开发的路由，可以参考 `routes.php`，分为登录未登录，鉴权和非鉴权
+
+原有的逻辑也可以通过修改路由或者继承响应的控制器以后进行重写
+
+
 
 
 

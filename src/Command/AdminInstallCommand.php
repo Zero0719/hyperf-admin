@@ -28,6 +28,7 @@ Router::addGroup('/admin', function () {
     Router::addGroup('', function () {
         Router::delete('/sessions', [Zero0719\HyperfAdmin\Controller\SessionsController::class, 'destroy']);
         Router::put('/sessions', [Zero0719\HyperfAdmin\Controller\SessionsController::class, 'update']);
+        Router::get('/me', [Zero0719\HyperfAdmin\Controller\SessionsController::class, 'me']);
 
         Router::get('/users/{id}', [Zero0719\HyperfAdmin\Controller\AdminUsersController::class, 'show']);
         Router::get('/roles/{id}', [Zero0719\HyperfAdmin\Controller\AdminRolesController::class, 'show']);
@@ -71,7 +72,6 @@ EOT;
         $this->call('vendor:publish', [
             'package' => 'zero0719/hyperf-admin'
         ]);
-
 
         if (!Db::getSchemaBuilder()->hasTable('admin_users')) {
             $this->call('admin:migrate');
@@ -174,5 +174,4 @@ EOT;
 
         $this->info('路由配置文件已更新.');
     }
-
 }
