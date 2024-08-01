@@ -67,7 +67,11 @@ class SessionsService extends BaseService
     public function me()
     {
         $user = AdminUsers::getCurrentUserInfoFromContext();
-        
+
+        if (in_array($user['id'], config('admin.white_list.users', [])) || array_intersect($user['roles'], config('admin.white_list.roles', []))) {
+            $user['roles'][] = 'SuperAdmin';
+        }
+
         return $user;
     }
 }
